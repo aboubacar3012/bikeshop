@@ -1,0 +1,32 @@
+body{
+  font-family: 'Darker Grotesque', sans-serif;
+}
+
+a:hover{
+  color: var(--bs-white);
+}
+a{
+  text-decoration: none;
+  font-size: x-large;
+}
+
+#picture-header {
+  background-image: url('./bike-background.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.card {
+ margin-bottom: 20px;
+}
+.basket-img{
+  width: 170px;
+}
+
+
+/* CSS */
+.col-img{
+  max-width: 60px;
+}
