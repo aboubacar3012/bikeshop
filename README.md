@@ -11,4 +11,4 @@ Voir la demo: [diallo-bikeshop](https://diallo-bikeshop.herokuapp.com/);
    4. Vider le panier
    5. Ajout un code promo
    6. Calculer un montant total du panier.
-4. Intégrer un moyen de paiement avec Stripe
+4. Intégrer un moyen de paiement avec Stripe.
