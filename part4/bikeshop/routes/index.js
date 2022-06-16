@@ -26,18 +26,28 @@ const dataBike = [
   },
 ];
 
-// let dataCardBike = []
+router.use("/",(req,res,next)=>{
+  if(req.session.dataCardBike || req.session.dataCardBike > 0){
+    req.session.count = req.session.dataCardBike.length;
+  }
+  next();
+})
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "BikeShop - Home", data: dataBike });
+  res.render("index", { title: "BikeShop - Home", data: dataBike, count : req.session.count });
 });
+
+router.use(function (req, res, next){
+  if (!req.session.dataCardBike) {
+    req.session.dataCardBike = [];
+    req.session.promo = 0;
+  }
+  next();
+})
 
 /* GET shops listing. */
 router.get("/shop", function (req, res, next) {
-  if (!req.session.dataCardBike) {
-    req.session.dataCardBike = [];
-  }
   if (req.query.model) {
     if (
       req.session.dataCardBike.find((bike) => bike.model === req.query.model)
@@ -64,7 +74,7 @@ router.get("/shop", function (req, res, next) {
       return res.redirect("/shop");
     }
   }
-  res.render("shop", { dataCardBike: req.session.dataCardBike });
+  res.render("shop", { dataCardBike: req.session.dataCardBike, promo: req.session.promo ? req.session.promo : 0 });
 });
 
 /* Delete shop by item */
@@ -76,12 +86,21 @@ router.get("/delete-shop", function (req, res, next) {
       req.session.dataCardBike = req.session.dataCardBike.filter(
         (bike) => bike.model !== req.query.model
       );
-      res.redirect("/shop");
+      res.redirect("/session");
     }
   } else {
-    res.redirect("/");
+    res.redirect("/session");
   }
 });
+
+router.use('/session',(req,res)=>{
+  if (req.session.dataCardBike.length === 0) {
+    req.session.destroy();
+  }
+  res.redirect("/shop");
+})
+
+
 
 router.post("/update-shop", function (req, res, next) {
   if (req.body.model) {
@@ -101,5 +120,26 @@ router.post("/update-shop", function (req, res, next) {
     res.redirect("/shop");
   }
 });
+
+const promo = {
+  CODE15: 0.15,
+  CODE20: 0.20,
+  CODE50: 0.50,
+  CODE99: 0.99
+}
+
+router.post('/promo',(req,res,next)=>{
+  for(const [key,value] of Object.entries(promo)){
+    if(key === req.body.promo){
+      req.session.promo = value;
+    }
+  }
+  res.redirect("/shop");
+})
+
+router.use('/destroy',(req,res,next)=>{
+  req.session.destroy();
+  res.redirect("/");
+})
 
 module.exports = router;
