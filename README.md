@@ -1,7 +1,6 @@
-# BIKESHOP
-Visiter le site [diallo-bikeshop](https://diallo-bikeshop.herokuapp.com/)
-## LES FONCTIONNALITÉS DÉVELOPPÉES VOUS ALLEZ CRÉER UN SITE E-COMMERCE “FROM SCRATCH”.
-
+# BIKESHOP : SITE E-COMMERCE “FROM SCRATCH”
+Visiter le site en ligne:  [diallo-bikeshop](https://diallo-bikeshop.herokuapp.com/);
+Voir la demo: [diallo-bikeshop](https://diallo-bikeshop.herokuapp.com/);
 ### En termes de fonctionnalités, voici ce que retrouverez dans ce projet :
 1. Mettre en place une interface utilisateur responsive.
 2. Gérer un catalogue produit. 
