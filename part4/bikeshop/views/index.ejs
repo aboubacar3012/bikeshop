@@ -64,15 +64,28 @@
               <p class="card-text">
                 <strong>Prix: </strong><%= data.price %> Є
               </p>
-              <a href="/shop?model=<%=data.model%>" class="btn btn-success"
-                >Add to cart</a
-              >
+              <a type="button" href="/add?model=<%=data.model%>" class="btn btn-success liveToastBtn">Add to cart</a>
             </div>
           </div>
         </div>
         <% }); %>
       </div>
     </div>
+
+    <!-- Mon toast -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-bg-warning">
+          <h4><strong class="me-auto">Ajout au panier</strong></h4>
+        </div>
+        <div class="toast-body">
+          <h5>Vous avez ajouté un article dans votre panier</h5>
+        </div>
+      </div>
+    </div>
+
+
+    
 
     <!-- Scripts ------------------------------------------- -->
     <script
@@ -85,5 +98,6 @@
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
     ></script>
+    <script src="/javascripts/script.js"></script>
   </body>
 </html>

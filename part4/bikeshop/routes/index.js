@@ -46,8 +46,7 @@ router.use(function (req, res, next){
   next();
 })
 
-/* GET shops listing. */
-router.get("/shop", function (req, res, next) {
+router.get('/add',function(req,res){
   if (req.query.model) {
     if (
       req.session.dataCardBike.find((bike) => bike.model === req.query.model)
@@ -58,7 +57,7 @@ router.get("/shop", function (req, res, next) {
       cart.map((item) => {
         item.quantity++;
       });
-      return res.redirect("/shop");
+      return res.redirect("/");
     } else {
       let newCart = {};
       const product = dataBike.filter((data) => data.model === req.query.model);
@@ -71,9 +70,13 @@ router.get("/shop", function (req, res, next) {
         };
         req.session.dataCardBike.push(cart);
       });
-      return res.redirect("/shop");
+      return res.redirect("/");
     }
   }
+})
+
+/* GET shops listing. */
+router.get("/shop", function (req, res, next) {
   res.render("shop", { dataCardBike: req.session.dataCardBike, promo: req.session.promo ? req.session.promo : 0 });
 });
 
@@ -141,5 +144,9 @@ router.use('/destroy',(req,res,next)=>{
   req.session.destroy();
   res.redirect("/");
 })
+
+
+
+
 
 module.exports = router;
